@@ -21,4 +21,13 @@ public class Automovil {
 	public double getPrecio() {
 		return this.precio;
 	}
+	public Motor getMotorAuto() {
+		return motorAuto;
+	}
+
+	public Chasis getChasisAuto() {
+		return chasisAuto;
+	}
+
+
 }

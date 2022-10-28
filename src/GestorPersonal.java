@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GestorPersonal {
@@ -7,20 +6,28 @@ public class GestorPersonal {
     public GestorPersonal(){
         this.personas = new ArrayList<Persona>();
     }
-    public Persona agregarPersona(String nombre, String apellido, String rut) {
-        Persona persona = new Persona(nombre, apellido, rut);
-        this.personas.add(persona);
-        return persona;
-    }
-    public List buscarAutoMarca(String marca) {
-        ArrayList<Persona> personas = new ArrayList<>();
-        for (Persona persona : this.personas) {
-            for (Automovil automovil : this.automoviles){
-
-            }
+    public boolean agregarPersona(String nombre, String apellido, String rut) {
+        if(buscarPersonaRut(rut) == null) {
+            Persona persona = new Persona(nombre, apellido, rut);
+            this.personas.add(persona);
+            return true;
+        }
+        else{
+            return false;
         }
     }
-    public List buscarPersonasNombre(String nombre){
+    public List<Persona> buscarAutoMarca(String marca) {
+        ArrayList<Persona> personas = new ArrayList<>();
+        for (Persona persona : this.personas) {
+            for(Automovil automovil : persona.getAutomoviles()){
+                if(automovil.getMarca().equals(marca)){
+                    personas.add(persona);
+                }
+            }
+        }
+        return personas;
+    }
+    public List<Persona> buscarPersonasNombre(String nombre){
         ArrayList<Persona> personas = new ArrayList<>();
         for (Persona persona : this.personas) {
             if(persona.getNombre().equals(nombre)){
@@ -36,6 +43,21 @@ public class GestorPersonal {
             }
         } return null;
     }
-    public Persona agregarAutoYCorreo()
+    public Persona agregarCorreo(String rut, CorreoElectronico correoElectronico, Automovil automovil){
+        for (Persona persona : this.personas){
+            if(persona.getRut().equals(rut)){
+                persona.correos.add(correoElectronico);
+            }
+        }
+        return null;
+    }
+    public Persona agregarAuto(String rut, CorreoElectronico correoElectronico, Automovil automovil){
+        for (Persona persona : this.personas){
+            if(persona.getRut().equals(rut)){
+                persona.automoviles.add(automovil);
+            }
+        }
+        return null;
+    }
 }
 
